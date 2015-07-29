@@ -7,4 +7,4 @@ while read -r line; do
     knife node delete $line --yes
     knife client delete $line --yes
     
-done < ~/path/to/nodes.txt
+done < nodes.txt

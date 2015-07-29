@@ -7,10 +7,10 @@ while read LINE; do
   myurl=`curl -s -I $LINE |awk '/HTTP/ { print $2 }'`
     
   # evaluate header response code. 301 is good, anything else not good.
-  if [ "$myurl" != "301" ]; then
-    echo "$LINE failed to redirect"    
+  if [ "$myurl" == "301" ] || [ "$myurl" == "302" ]; then
+    echo "$LINE redirect was a SUCCESS"    
   else
-    echo "redirect is ok"
+    echo "redirect has FAILED"
   fi
 
 done < curls.txt
