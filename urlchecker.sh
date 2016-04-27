@@ -4,10 +4,11 @@
 
 while read LINE; do 
   # curl each line, no progress bar. awk derive header response code from output.
-  myurl=`curl -s -I $LINE |awk '/HTTP/ { print $2 }'`
+  myurl=`curl -sk -U user:password -I $LINE |awk '/HTTP/ { print $2 }'`
     
   # evaluate header response code. 301 is good, anything else not good.
   if [ "$myurl" == "301" ] || [ "$myurl" == "302" ]; then
+  #if [ "$myurl" == "200" ] || [ "$myurl" == "200" ]; then
     echo "$LINE redirect was a SUCCESS"    
   else
     echo "redirect has FAILED"
